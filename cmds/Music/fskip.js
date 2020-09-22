@@ -26,7 +26,6 @@ module.exports.run = async function(client, message, args, ops) {
   if(fetched.queue[0].voteSkips.length >= required) {
     message.channel.send('✔️ Successfully skipped song!');
     message.react('👍')
-    sleep(1000)
     return fetched.dispatcher.emit('finish');
   }
 }
