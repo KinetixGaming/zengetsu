@@ -16,7 +16,7 @@ module.exports.run = (client, message, args, ops) => {
 		}
 
 		resp += `\n**Choose a number between** \`1-${videos.length}\``;
-		if (videos.length <= 1) return message.channel.send('No videos could be found.')
+		//if (videos.length <= 0) return message.channel.send('No videos could be found.')
 
 		let embed = new Discord.MessageEmbed()
 			.setColor(0xFFFF00)
