@@ -22,7 +22,7 @@
     "ffmpeg": "0.0.4",
     "fs": "^0.0.2",
     "fs-readdir-recursive": "^1.1.0",
-    "genius-lyrics": "^3.0.0",
+    "genius-lyrics": "^4.0.0",
     "keyv": "^4.0.3",
     "minimist": "^1.2.5",
     "node-opus": "^0.3.3",
@@ -30,11 +30,11 @@
     "prism-media": "^1.2.2",
     "relevant-urban": "^2.0.0",
     "simple-youtube-api": "^5.2.1",
-    "spotify-url-info": "^1.4.0",
+    "spotify-url-info": "^2.2.0",
     "trivia-api": "^1.0.1",
     "wtf_wikipedia": "^8.5.1",
     "yt-search": "^2.5.0",
-    "ytdl-core": "^2.1.5",
+    "ytdl-core": "^4.0.5",
     "ytdl-core-discord": "^1.2.4"
   },
   "devDependencies": {
