@@ -18,16 +18,13 @@ module.exports.run = async function(client, message, args, ops) {
   let required = 1;
   if (!fetched.queue[0].voteSkips) fetched.queue[0].voteSkips = [];
 
-  if (fetched.queue[0].voteSkips.includes(message.member.id)) return message.channel.send(`Sorry, you already voted to skip this song! **${fetched.queue[0].voteSkips.length}/${required}** required.`);
 
   fetched.queue[0].voteSkips.push(message.member.id);
   ops.active.set(message.guild.id, fetched);
 
-  if(fetched.queue[0].voteSkips.length >= required) {
-    message.channel.send('✔️ Successfully skipped song!');
-    message.react('👍')
-    return fetched.dispatcher.emit('finish');
-  }
+  message.channel.send('✔️ Successfully skipped song!');
+  message.react('👍')
+  return fetched.dispatcher.emit('finish');
 }
 
 module.exports.help = {

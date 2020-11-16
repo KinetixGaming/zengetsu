@@ -120,8 +120,7 @@ async function Finalize(client, message, args) {
   collector.on('collect', message => {
     if (message.content.toLowerCase() === 'yes') {
       message.reply('Your character has been successfully created!')
-      collector.stop()
-      Personality(client, message, args)
+      return collector.stop()
     } else if (message.content.toLowerCase() === 'no'){
       message.channel.send('Please restart creation.')
       collector.stop()
