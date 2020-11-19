@@ -6,11 +6,9 @@ module.exports.run = async function(client, message, args, ops) {
       if (message.member.voice.channel !== message.guild.me.voice.channel) return message.channel.send('Sorry, you currently aren\'t in my voice channel!');
     }
 
-    let vc = client.guilds.resolve(dispatcher.guildID).me.voice.channel;
+    message.guild.me.voice.channel.leave();
 
-    channel.send('No one left in Voice Channel.')
-    ops.active.delete(dispatcher.guildID);
-    return vc.leave();
+    message.channel.send('I\'ve been disconnected')
 }
 
 module.exports.help = {
