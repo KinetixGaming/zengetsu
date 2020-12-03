@@ -61,22 +61,25 @@ module.exports.run = async (client, message, args, ops) => {
 
   } else if (!validate && args[0].match(/^(?:https:\/\/open\.spotify\.com|spotify)([\/:])user\1([^\/]+)\1playlist\1([a-z0-9]+)/) || args[0].includes('https://open.spotify.com/album/')) {
     let playData = await getData(args[0])
+    //console.log(playData)
     for (const video of Object.values(playData.tracks.items)) {
+      //console.log(video)
       try {
 
         if(args[0].match(/^(?:https:\/\/open\.spotify\.com|spotify)([\/:])user\1([^\/]+)\1playlist\1([a-z0-9]+)/)) {
           const vidData = await getPreview(video.track.external_urls.spotify)
         }
 
-        const vidData = await getPreview(video.external_urls.spotify)
+        const vidData = await getPreview(video.track.external_urls.spotify)
         const URL = await youtube.searchVideos((vidData.title + vidData.artist), 1)
 
-        if(URL.length <= 0) message.channel.send(`Not search results came up for: **${vidData.title} - ${vidData.artist}**`)
+        if(URL.length <= 0) message.channel.send(`No search results came up for: **${vidData.title} - ${vidData.artist}**`)
 
         const video4 = await youtube.getVideoByID(URL[0].id)
         await handleVideo(video4, message, voiceChannel, true)
       } catch (err) {
         console.log('Fetched an error: ' +err.message)
+        return message.channel.send('Error: I hate my life hahahahaha')
       }
     }
 
@@ -126,7 +129,7 @@ module.exports.run = async (client, message, args, ops) => {
       else message.channel.send(`Loading...`).then((sentMessage) => sentMessage.edit(`Added To Queue: **${info.title}** | Request By: ${data.queue[data.queue.length - 1].requester} `, {allowedMentions: {parse: []}})).then(msg => {msg.delete({timeout: 10000});});
     }
 
-    ops.active.set(message.guild.id, data);
+    await ops.active.set(message.guild.id, data);
   }
 };
 
@@ -141,13 +144,8 @@ function sleep(milliseconds) {
 
 async function play(client, ops, data) {
   var channel = client.channels.cache.get(data.queue[0].announcementChannel);
-  channel
-    .send(
-      `🎵 Now Playing: **${data.queue[0].songTitle}** 🎵 | Requested by: @${data.queue[0].requester}`, {allowedMentions: {parse: []}}
-    )
-    .then(msg => {
-      msg.delete({timeout: 10000});
-    });
+  channel.send(`🎵 Now Playing: **${data.queue[0].songTitle}** 🎵 | Requested by: @${data.queue[0].requester}`, {allowedMentions: {parse: []}})
+  //.then(msg => {msg.delete({timeout: 10000});});
   //const input = await ytdl(data.queue[0].url)
   //data.queue[0].url = 'https://www.youtube.com' + data.queue[0].url
   //const pcm = input.pipe(new prism.opus.Decoder({rate: 48000, channels: 2, frameSize: 960}));
