@@ -59,12 +59,12 @@ module.exports.run = async (client, message, args, ops) => {
   }  else if (!validate && message.content.includes('https://soundcloud.com/')) {
       return message.channel.send('Soundcloud audio is not yet supported, but I\'m working on it!')
 
-  } else if (!validate && args[0].includes("https://open.spotify.com/playlist") || args[0].includes('https://open.spotify.com/album/')) {
+  } else if (!validate && args[0].match(/^(?:https:\/\/open\.spotify\.com|spotify)([\/:])user\1([^\/]+)\1playlist\1([a-z0-9]+)/) || args[0].includes('https://open.spotify.com/album/')) {
     let playData = await getData(args[0])
     for (const video of Object.values(playData.tracks.items)) {
       try {
 
-        if(args[0].includes("https://open.spotify.com/playlist")) {
+        if(args[0].match(/^(?:https:\/\/open\.spotify\.com|spotify)([\/:])user\1([^\/]+)\1playlist\1([a-z0-9]+)/)) {
           const vidData = await getPreview(video.track.external_urls.spotify)
         }
 
