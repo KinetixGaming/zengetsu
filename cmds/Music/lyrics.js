@@ -12,7 +12,7 @@ module.exports.run = async (client, message, args, ops) => {
 
   async function lyrics() {
      try {
-          let results = await genius.tracks.search(nowPlaying.songTitle);
+          let results = await genius.songs.search(nowPlaying.songTitle);
           const song = results[0];
           const lyrics = await song.lyrics()
           return lyrics
@@ -24,8 +24,22 @@ module.exports.run = async (client, message, args, ops) => {
   let pages = []
   let page = 1;
 
-  var lyrics = await lyrics();
+  var lyricss = await lyrics();
 
+  try {
+    var words = lyrics.split(" ");
+  } catch (err) {
+    return message.channel.send('No lyrics could be found for that song!')
+  }
+
+  let embed = new Discord.MessageEmbed()
+  .setColor(0xFFFF00)
+  .setTitle(`**Lyrics For: ${queue[0].songTitle}**`)
+  .setDescription(lyricss)
+
+  message.channel.send(embed, {split: true})
+
+/*
   try {
     var words = lyrics.split(" ");
   } catch (err) {
@@ -84,7 +98,9 @@ module.exports.run = async (client, message, args, ops) => {
       })
     })
   })
+  */
 };
+
 
 module.exports.help = {
   name: "lyrics",
