@@ -27,7 +27,7 @@ module.exports.run = async (client, message, args, ops) => {
   var lyricss = await lyrics();
 
   try {
-    var words = lyrics.split(" ");
+    var words = lyricss.split(" ");
   } catch (err) {
     return message.channel.send('No lyrics could be found for that song!')
   }
