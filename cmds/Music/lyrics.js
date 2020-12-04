@@ -24,22 +24,8 @@ module.exports.run = async (client, message, args, ops) => {
   let pages = []
   let page = 1;
 
-  var lyricss = await lyrics();
+  let lyrics = await lyrics();
 
-  try {
-    var words = lyricss.split(" ");
-  } catch (err) {
-    return message.channel.send('No lyrics could be found for that song!')
-  }
-
-  let embed = new Discord.MessageEmbed()
-  .setColor(0xFFFF00)
-  .setTitle(`**Lyrics For: ${queue[0].songTitle}**`)
-  .setDescription(lyricss)
-
-  message.channel.send(embed, {split: true})
-
-/*
   try {
     var words = lyrics.split(" ");
   } catch (err) {
@@ -98,9 +84,7 @@ module.exports.run = async (client, message, args, ops) => {
       })
     })
   })
-  */
 };
-
 
 module.exports.help = {
   name: "lyrics",
