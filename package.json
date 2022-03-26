@@ -27,7 +27,7 @@
     "fs-readdir-recursive": "^1.1.0",
     "genius-lyrics": "^4.0.0",
     "keyv": "^4.0.3",
-    "minimist": "^1.2.5",
+    "minimist": "^1.2.6",
     "node-image-downloader": "^1.0.7",
     "node-opus": "^0.3.3",
     "opusscript": "^0.0.7",
@@ -43,6 +43,6 @@
     "ytdl-core-discord": "^1.2.4"
   },
   "devDependencies": {
-    "minimist": ">=1.2.2"
+    "minimist": ">=1.2.6"
   }
 }
